@@ -15,10 +15,17 @@ import {
   SpeakerWaveIcon,
   VideoCameraIcon,
 } from "@heroicons/react/24/outline"
+import {
+  signIn,
+  signOut,
+  useSession,
+} from "next-auth/react"
 
 function Header() {
+  const { data: session } = useSession()
+
   return (
-    <div className="sticky top-0 z-50 flex px-4 py-2 shadow-sm items-center gap-x-4">
+    <div className="sticky top-0 z-50 flex px-4 py-2 shadow-sm items-center gap-x-4 bg-white">
       <div className="relative w-20 h-10 flex-shrink-0">
         <Image
           objectFit="contain"
@@ -62,19 +69,48 @@ function Header() {
       </div>
 
       {/* Sign-in / Sign-out */}
-      <div className="hidden lg:flex items-center cursor-pointer p-2 space-x-2 border border-gray-100">
-        <div className="relative h-5 w-5 flex-shrink-0">
-          <Image
-            objectFit="contain"
-            src="https://links.papareact.com/23l"
-            layout="fill"
-          />
-        </div>
+      {session ? (
+        <div
+          onClick={() => signOut()}
+          className="hidden lg:flex items-center cursor-pointer p-2 space-x-2 border border-gray-100"
+        >
+          <div className="relative h-5 w-5 flex-shrink-0">
+            <Image
+              objectFit="contain"
+              src="https://links.papareact.com/23l"
+              layout="fill"
+            />
+          </div>
 
-        <p className="text-gray-400 whitespace-nowrap">
-          Sign in
-        </p>
-      </div>
+          <div className="flex-1 text-xs">
+            <p className="truncate">
+              {session?.user?.name}
+            </p>
+            <p className="text-gray-400 whitespace-nowrap">
+              1 Karma
+            </p>
+          </div>
+
+          <ChevronDownIcon className="h-5 w-5 flex-shrink-0 text-gray-500" />
+        </div>
+      ) : (
+        <div
+          onClick={() => signIn()}
+          className="hidden lg:flex items-center cursor-pointer p-2 space-x-2 border border-gray-100"
+        >
+          <div className="relative h-5 w-5 flex-shrink-0">
+            <Image
+              objectFit="contain"
+              src="https://links.papareact.com/23l"
+              layout="fill"
+            />
+          </div>
+
+          <p className="text-gray-400 whitespace-nowrap">
+            Sign in
+          </p>
+        </div>
+      )}
     </div>
   )
 }
