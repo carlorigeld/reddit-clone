@@ -21,8 +21,6 @@ function Avatar({ seed, large }: AvatarProps) {
         }.svg`}
         layout="fill"
       />
-
-      <p>TEST 4</p>
     </div>
   )
 }
