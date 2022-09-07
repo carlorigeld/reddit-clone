@@ -22,7 +22,7 @@ function Avatar({ seed, large }: AvatarProps) {
         layout="fill"
       />
 
-      <p>TEST</p>
+      <p>TEST 2</p>
     </div>
   )
 }
