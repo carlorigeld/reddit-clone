@@ -84,7 +84,6 @@ function PostBox() {
         })
       } else {
         //Use existing subreddit
-
         const image = formData.postImage || ""
 
         const {
