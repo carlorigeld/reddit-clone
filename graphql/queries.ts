@@ -10,6 +10,22 @@ export const GET_ALL_POST = gql`
       subreddit_id
       title
       username
+      comments {
+        id
+        post_id
+        text
+        username
+      }
+      subreddit {
+        id
+        topic
+      }
+      votes {
+        id
+        post_id
+        upvote
+        username
+      }
     }
   }
 `
